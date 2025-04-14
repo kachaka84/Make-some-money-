@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 
 function MatchList() {
@@ -11,18 +10,14 @@ function MatchList() {
         const data = await response.json();
         if (data && data.events) {
           const limited = data.events.slice(0, 10).map(event => ({
-            const avgGoals = Math.random() * 3.5;
-            const goalPrediction = avgGoals > 2.5 ? 'Над 2.5 гола' : 'Под 2.5 гола';
-            return {
-              teams: `${event.strHomeTeam} vs ${event.strAwayTeam}`,
-              time: event.strTime,
-              prediction: goalPrediction
-            };
-          });
+            teams: `${event.strHomeTeam} vs ${event.strAwayTeam}`,
+            time: event.strTime,
+            prediction: (Math.random() * 3.5 > 2.5 ? 'Над 2.5 гола' : 'Под 2.5 гола')
+          }));
           setMatches(limited);
         }
       } catch (error) {
-        console.error("Грешка при зареждане на мачове", error);
+        console.error("Грешка при зареждане на мачове:", error);
       }
     }
     fetchMatches();
