@@ -10,7 +10,7 @@ function MatchList() {
         const response = await fetch('https://www.thesportsdb.com/api/v1/json/1/eventsday.php?d=2024-04-14&s=Soccer');
         const data = await response.json();
         if (data && data.events) {
-          const limited = data.events.slice(0, 10).map(event => {
+          const limited = data.events.slice(0, 10).map(event => ({
             const avgGoals = Math.random() * 3.5;
             const goalPrediction = avgGoals > 2.5 ? 'Над 2.5 гола' : 'Под 2.5 гола';
             return {
