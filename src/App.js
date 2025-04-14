@@ -1,11 +1,12 @@
 
 import React from 'react';
+import MatchList from './MatchList';
 
 function App() {
   return (
-    <div style={{ backgroundColor: 'white', color: 'black', padding: '2rem' }}>
+    <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
       <h1>Прогнозаторът на Вачев</h1>
-      <p>Сайтът работи успешно!</p>
+      <MatchList />
     </div>
   );
 }
