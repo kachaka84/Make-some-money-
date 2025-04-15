@@ -12,3 +12,15 @@ function App() {
 }
 
 export default App;
+import MatchList from './MatchList';
+
+function App() {
+  return (
+    <div className="App">
+      <h1>Прогнозаторът на Вачев</h1>
+      <MatchList />
+    </div>
+  );
+}
+
+export default App;
