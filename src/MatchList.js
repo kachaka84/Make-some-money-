@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 
 function MatchList() {
@@ -7,20 +6,16 @@ function MatchList() {
   useEffect(() => {
     async function fetchMatches() {
       try {
-        const response = await fetch('https://www.thesportsdb.com/api/v1/json/1/eventsday.php?d=2024-04-14&s=Soccer');
+        const response = await fetch('https://make-some-money-backend-production.up.railway.app/matches');
         const data = await response.json();
-        if (data && data.events) {
-          const limited = data.events.slice(0, 10).map(event => ({
-            teams: `${event.strHomeTeam} vs ${event.strAwayTeam}`,
-            time: event.strTime,
-            prediction: (Math.random() * 3.5 > 2.5 ? 'Над 2.5 гола' : 'Под 2.5 гола')
-          }));
-          setMatches(limited);
+        if (data && data.fixtures) {
+          setMatches(data.fixtures);
         }
       } catch (error) {
-        console.error("Грешка при зареждане на мачове:", error);
+        console.error("Грешка при зареждане на мачовете:", error);
       }
     }
+
     fetchMatches();
   }, []);
 
@@ -32,15 +27,15 @@ function MatchList() {
           <tr>
             <th style={{ border: '1px solid #ccc', padding: '8px' }}>Мач</th>
             <th style={{ border: '1px solid #ccc', padding: '8px' }}>Час</th>
-            <th style={{ border: '1px solid #ccc', padding: '8px' }}>Голове</th>
+            <th style={{ border: '1px solid #ccc', padding: '8px' }}>Прогноза</th>
           </tr>
         </thead>
         <tbody>
           {matches.map((match, idx) => (
             <tr key={idx}>
-              <td style={{ border: '1px solid #ccc', padding: '8px' }}>{match.teams}</td>
-              <td style={{ border: '1px solid #ccc', padding: '8px' }}>{match.time}</td>
-              <td style={{ border: '1px solid #ccc', padding: '8px' }}>{match.prediction}</td>
+              <td style={{ border: '1px solid #ccc', padding: '8px' }}>{match.home} vs {match.away}</td>
+              <td style={{ border: '1px solid #ccc', padding: '8px' }}>{match.date}</td>
+              <td style={{ border: '1px solid #ccc', padding: '8px' }}>Очаква се</td>
             </tr>
           ))}
         </tbody>
